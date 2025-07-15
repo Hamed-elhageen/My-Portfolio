@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-
+import { ɵBrowserAnimationBuilder } from '@angular/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -11,6 +11,8 @@ import { SkillsComponent } from './components/skills/skills.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ParticlesComponent } from './components/particles/particles.component';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
+
   ],
   providers: [
     provideClientHydration()

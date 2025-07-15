@@ -1,9 +1,7 @@
-
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* by that you can use tailwind components and utilities */
 
 * {
   margin: 0;
@@ -12,7 +10,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth;                                                     /*for smooth scrolling*/
 }
 
 body {
@@ -24,39 +22,37 @@ body {
 /* Dark mode styles */
 .dark {
   color: #ffffff;
-  background: #0f172a;
+  background: #111827;
 }
-
+/* styles for both light and dark theme  */
 /* Light mode styles */
 body:not(.dark) {
   color: #1f2937;
   background: #ffffff;
 }
 
+/* styles for scroll bar in the right  */
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 8px;                                         /*width of scroll bar*/
 }
+/* ::-webkit-                                       this is the engine محرك for chroome ,edge , safari , so you should write it  */
 
 ::-webkit-scrollbar-track {
-  background: theme("colors.slate.800");
+  background: #e5e7eb;                          /*color of the track in which the scroll bar moves*/
 }
 
 .dark ::-webkit-scrollbar-track {
-  background: theme("colors.slate.800");
-}
-
-body:not(.dark) ::-webkit-scrollbar-track {
-  background: theme("colors.gray.200");
+  background: #1f2937;                           /*color of the scroll bar track in the dark mode */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, theme("colors.purple.500"), theme("colors.pink.500"));
+  background: linear-gradient(to bottom, #3b82f6, #1d4ed8);                             /*this is the scroll bar itself */
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, theme("colors.purple.600"), theme("colors.pink.600"));
+  background: linear-gradient(to bottom, #2563eb, #1e40af);
 }
 
 /* Animation delays */
@@ -129,14 +125,14 @@ body:not(.dark) ::-webkit-scrollbar-track {
 
 /* Custom button hover effects */
 .btn-gradient {
-  background: linear-gradient(135deg, theme("colors.purple.500") 0%, theme("colors.pink.500") 100%);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
   transition: all 0.3s ease;
 }
 
 .btn-gradient:hover {
-  background: linear-gradient(135deg, theme("colors.purple.600") 0%, theme("colors.pink.600") 100%);
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
 }
 
 /* Smooth transitions for theme switching */
@@ -156,15 +152,11 @@ body:not(.dark) ::-webkit-scrollbar-track {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Neon glow effects */
-.neon-purple {
-  box-shadow: 0 0 20px theme("colors.purple.500/50");
+/* Professional glow effects */
+.neon-blue {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
 
-.neon-pink {
-  box-shadow: 0 0 20px theme("colors.pink.500/50");
-}
-
-.neon-cyan {
-  box-shadow: 0 0 20px theme("colors.cyan.500/50");
+.neon-gray {
+  box-shadow: 0 0 20px rgba(107, 114, 128, 0.5);
 }

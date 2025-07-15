@@ -1,5 +1,6 @@
 import { Component, type OnInit } from "@angular/core"
 import { trigger, style, transition, animate, query, stagger } from "@angular/animations"
+import  { ThemeService } from "../../services/theme.service"
 
 @Component({
   selector: "app-skills",
@@ -30,12 +31,14 @@ import { trigger, style, transition, animate, query, stagger } from "@angular/an
   ],
 })
 export class SkillsComponent implements OnInit {
+  isDarkMode = true
+
   skillCategories = [
     {
       title: "Frameworks & Libraries",
       skills: [
         { name: "Angular", level: 90, color: "from-red-500 to-red-600" },
-        { name: "React.js", level: 70, color: "from-blue-500 to-blue-600" },
+        { name: "React.js", level: 75, color: "from-blue-500 to-blue-600" },
         { name: "Tailwind CSS", level: 85, color: "from-cyan-500 to-cyan-600" },
         { name: "Bootstrap", level: 80, color: "from-purple-500 to-purple-600" },
         { name: "Redux", level: 70, color: "from-violet-500 to-violet-600" },
@@ -47,7 +50,7 @@ export class SkillsComponent implements OnInit {
         { name: "TypeScript", level: 85, color: "from-blue-600 to-blue-700" },
         { name: "JavaScript", level: 90, color: "from-yellow-500 to-yellow-600" },
         { name: "HTML5", level: 95, color: "from-orange-500 to-orange-600" },
-        { name: "CSS3", level: 95, color: "from-blue-500 to-blue-600" },
+        { name: "CSS3", level: 90, color: "from-blue-500 to-blue-600" },
         { name: "C++", level: 80, color: "from-gray-500 to-gray-600" },
       ],
     },
@@ -57,11 +60,17 @@ export class SkillsComponent implements OnInit {
         { name: "Git & GitHub", level: 85, color: "from-gray-700 to-gray-800" },
         { name: "Postman", level: 80, color: "from-orange-500 to-orange-600" },
         { name: "OOP", level: 85, color: "from-green-500 to-green-600" },
-        { name: "Data Structures", level: 75, color: "from-indigo-500 to-indigo-600" },
-        { name: "Problem Solving", level: 80, color: "from-pink-500 to-pink-600" },
+        { name: "Data Structures", level: 85, color: "from-indigo-500 to-indigo-600" },
+        { name: "Algorithms", level: 85, color: "from-pink-500 to-pink-600" },
       ],
     },
   ]
+
+  constructor(private themeService: ThemeService) {
+    this.themeService.isDarkMode$.subscribe((isDark) => {
+      this.isDarkMode = isDark
+    })
+  }
 
   ngOnInit() {}
 }

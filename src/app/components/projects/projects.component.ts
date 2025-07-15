@@ -1,5 +1,6 @@
 import { Component } from "@angular/core"
 import { trigger, state, style, transition, animate, query, stagger } from "@angular/animations"
+import  { ThemeService } from "../../services/theme.service"
 
 @Component({
   selector: "app-projects",
@@ -26,6 +27,9 @@ import { trigger, state, style, transition, animate, query, stagger } from "@ang
   ],
 })
 export class ProjectsComponent {
+  isDarkMode = true
+  hoveredCard: number | null = null
+
   projects = [
     {
       title: "Damanhour University Portal",
@@ -44,6 +48,15 @@ export class ProjectsComponent {
       type: "E-commerce",
       link: "https://github.com/Hamed-elhageen/Africa-Store",
       image: "/africa store.png",
+    },
+    {
+      title: "Portfolio",
+      description:
+        "A modern and responsive web portfolio built with Angular to showcase my front-end development skills, projects, and experience. It features interactive animations, a dark/light theme toggle, smooth navigation, and a dynamic UI designed to highlight my work, skills, and contact information.",
+      techStack: ["Angular", "TypeScript", "Tailwind css"],
+      type: "Personal App",
+      link: "https://github.com/Hamed-elhageen/My-Portfolio",
+      image: "/portfolio.png",
     },
     {
       title: "CRUD System",
@@ -69,21 +82,16 @@ export class ProjectsComponent {
         "A simple and responsive weather application that allows users to search for any city and view real-time weather data. It displays key information such as temperature, wind speed, and weather conditions using a clean and user-friendly interface. Powered by a public weather API.",
       techStack: ["JavaScript", "HTML5", "CSS3"],
       type: "Interactive App",
-      link: "https://hamed-elhageen.github.io/Weather-app/",
+      link: "https://github.com/Hamed-elhageen/Weather-app",
       image: "/weather app.png",
-    },
-     {
-      title: "Portfolio",
-      description:
-        "A modern and responsive web portfolio built with Angular to showcase my front-end development skills, projects, and experience. It features interactive animations, a dark/light theme toggle, smooth navigation, and a dynamic UI designed to highlight my work, skills, and contact information.",
-      techStack: ["Angular", "TypeScript", "Tailwind css"],
-      type: "Personal App",
-      link: "https://github.com/Hamed-elhageen/Quiz-app",
-      image: "/quiz app.png",
     },
   ]
 
-  hoveredCard: number | null = null
+  constructor(private themeService: ThemeService) {
+    this.themeService.isDarkMode$.subscribe((isDark) => {
+      this.isDarkMode = isDark
+    })
+  }
 
   onCardHover(index: number) {
     this.hoveredCard = index

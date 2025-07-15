@@ -1,6 +1,20 @@
-import { Component, type OnInit, Inject, PLATFORM_ID } from "@angular/core"
-import  { ThemeService } from "../../services/theme.service"
-import { trigger, style, transition, animate, query, stagger, state } from "@angular/animations"
+import {
+  Component,
+  OnInit,
+  Inject,
+  PLATFORM_ID
+} from "@angular/core";
+import { isPlatformBrowser } from "@angular/common";
+import { ThemeService } from "../../services/theme.service";
+import {
+  trigger,
+  style,
+  transition,
+  animate,
+  query,
+  stagger,
+  state
+} from "@angular/animations";
 
 @Component({
   selector: "app-about",
@@ -25,9 +39,11 @@ import { trigger, style, transition, animate, query, stagger, state } from "@ang
           ":enter",
           [
             style({ opacity: 0, transform: "translateY(30px)" }),
-            stagger(200, [animate("0.8s ease-out", style({ opacity: 1, transform: "translateY(0)" }))]),
+            stagger(200, [
+              animate("0.8s ease-out", style({ opacity: 1, transform: "translateY(0)" }))
+            ]),
           ],
-          { optional: true },
+          { optional: true }
         ),
       ]),
     ]),
@@ -39,8 +55,8 @@ import { trigger, style, transition, animate, query, stagger, state } from "@ang
   ],
 })
 export class AboutComponent implements OnInit {
-  isDarkMode = true
-  hoveredCard: number | null = null
+  isDarkMode = true;
+  hoveredCard: number | null = null;
 
   personalInfo = [
     {
@@ -68,7 +84,7 @@ export class AboutComponent implements OnInit {
       value: "Egyptian",
       icon: "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 104 0 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064",
     },
-  ]
+  ];
 
   education = {
     degree: "Bachelor of Computer Science",
@@ -79,20 +95,20 @@ export class AboutComponent implements OnInit {
 
   constructor(
     private themeService: ThemeService,
-    @Inject(PLATFORM_ID) private platformId: any,
+    @Inject(PLATFORM_ID) private platformId: Object // ✅ Fixed
   ) {
     this.themeService.isDarkMode$.subscribe((isDark) => {
-      this.isDarkMode = isDark
-    })
+      this.isDarkMode = isDark;
+    });
   }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  onCardHover(index: number) {
-    this.hoveredCard = index
+  onCardHover(index: number): void {
+    this.hoveredCard = index;
   }
 
-  onCardLeave() {
-    this.hoveredCard = null
+  onCardLeave(): void {
+    this.hoveredCard = null;
   }
 }

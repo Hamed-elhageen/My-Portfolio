@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild, Inject } from "@angular/core";
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, Inject, PLATFORM_ID } from "@angular/core";
 import { isPlatformBrowser } from "@angular/common";
 import { ThemeService } from "../../services/theme.service";
-import{PLATFORM_ID} from '@angular/core'
 
 @Component({
   selector: "app-particles",
@@ -9,46 +8,44 @@ import{PLATFORM_ID} from '@angular/core'
   styleUrls: ["./particles.component.css"],
 })
 export class ParticlesComponent implements OnInit, OnDestroy {
-  @ViewChild("canvas", { static: true }) canvasRef!: ElementRef<HTMLCanvasElement>;
-  private ctx!: CanvasRenderingContext2D;
-  private particles: Particle[] = [];
+  @ViewChild("canvas", { static: true }) canvasRef!: ElementRef<HTMLCanvasElement>;                    //linking with the canvas element in html
+  private ctx!: CanvasRenderingContext2D;                                                                                          //this is like a painter which will paint on the board (canvas)
+  private particles: Particle[] = [];                                                                                                          // this is the array which contains the particles which will be on the canvas
   private animationId!: number;
   private isDarkMode = true;
-  private isBrowser = false;
 
   constructor(
     private themeService: ThemeService,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {
-    this.isBrowser = isPlatformBrowser(this.platformId);
-  }
+    @Inject(PLATFORM_ID) private platformId: Object // ✅ FIXED                                                         //injecting the services to the constructor
+  ) {}
 
   ngOnInit() {
-    this.themeService.isDarkMode$.subscribe((isDark) => {
+    this.themeService.isDarkMode$.subscribe((isDark) => {                                                                               //this to cotrol the dark mode
       this.isDarkMode = isDark;
     });
 
-    if (this.isBrowser) {
-      this.initCanvas();
-      this.createParticles();
-      this.animate();
+    if (isPlatformBrowser(this.platformId)) {
+      this.initCanvas();                                                                                                                                        //this to create the board where we will paint the particles (board)
+      this.createParticles();                                                                                                                                //creating the particles
+      this.animate();                                                                                                                                         //this is to create the animation which moves the particles
+    // you will see the execution of each function
     }
   }
 
   ngOnDestroy() {
-    if (this.isBrowser && this.animationId) {
+    if (isPlatformBrowser(this.platformId) && this.animationId) {
       cancelAnimationFrame(this.animationId);
     }
   }
 
   private initCanvas() {
-    if (!this.isBrowser) return;
+    if (!isPlatformBrowser(this.platformId)) return;
 
     const canvas = this.canvasRef.nativeElement;
     this.ctx = canvas.getContext("2d")!;
 
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
+      canvas.width = window.innerWidth;                                                                                              //making the canvas (board) width = the width of the window
       canvas.height = window.innerHeight;
     };
 
@@ -57,21 +54,16 @@ export class ParticlesComponent implements OnInit, OnDestroy {
   }
 
   private createParticles() {
-    if (!this.isBrowser) return;
+    if (!isPlatformBrowser(this.platformId)) return;
 
-    const particleCount = 50;
+    const particleCount = 100;
     for (let i = 0; i < particleCount; i++) {
-      this.particles.push(
-        new Particle(
-          Math.random() * window.innerWidth,
-          Math.random() * window.innerHeight
-        )
-      );
+      this.particles.push(new Particle(Math.random() * window.innerWidth, Math.random() * window.innerHeight));
     }
   }
 
   private animate() {
-    if (!this.isBrowser || !this.ctx) return;
+    if (!isPlatformBrowser(this.platformId) || !this.ctx) return;
 
     this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
@@ -114,7 +106,7 @@ class Particle {
   draw(ctx: CanvasRenderingContext2D, isDarkMode: boolean) {
     ctx.save();
     ctx.globalAlpha = this.opacity;
-    ctx.fillStyle = isDarkMode ? "#8b5cf6" : "#6366f1";
+    ctx.fillStyle = isDarkMode ? "#3b82f6" : "#1e40af";
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     ctx.fill();

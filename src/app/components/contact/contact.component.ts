@@ -1,5 +1,6 @@
 import { Component } from "@angular/core"
 import { trigger, style, transition, animate } from "@angular/animations"
+import  { ThemeService } from "../../services/theme.service"
 
 @Component({
   selector: "app-contact",
@@ -12,10 +13,11 @@ import { trigger, style, transition, animate } from "@angular/animations"
         animate("0.8s ease-out", style({ opacity: 1, transform: "translateY(0)" })),
       ]),
     ]),
-    // REMOVED: The problematic pulse animation - we'll use CSS instead
   ],
 })
 export class ContactComponent {
+  isDarkMode = true
+
   contactInfo = [
     {
       icon: "M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
@@ -36,4 +38,10 @@ export class ContactComponent {
       link: "#",
     },
   ]
+
+  constructor(private themeService: ThemeService) {
+    this.themeService.isDarkMode$.subscribe((isDark) => {
+      this.isDarkMode = isDark
+    })
+  }
 }
