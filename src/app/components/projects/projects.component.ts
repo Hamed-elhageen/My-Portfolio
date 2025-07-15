@@ -53,7 +53,7 @@ export class ProjectsComponent {
       title: "Portfolio",
       description:
         "A modern and responsive web portfolio built with Angular to showcase my front-end development skills, projects, and experience. It features interactive animations, a dark/light theme toggle, smooth navigation, and a dynamic UI designed to highlight my work, skills, and contact information.",
-      techStack: ["Angular", "TypeScript", "Tailwind css"],
+      techStack: ["Angular", "TypeScript", "Tailwind css","Angular animations"],
       type: "Personal App",
       link: "https://github.com/Hamed-elhageen/My-Portfolio",
       image: "/portfolio.png",
