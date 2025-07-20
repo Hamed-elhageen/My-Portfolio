@@ -1,6 +1,7 @@
-import { Component } from "@angular/core"
+import { Component, Inject, OnInit, PLATFORM_ID } from "@angular/core"
 import { trigger, state, style, transition, animate, query, stagger } from "@angular/animations"
 import  { ThemeService } from "../../services/theme.service"
+import { isPlatformBrowser } from "@angular/common"
 
 @Component({
   selector: "app-projects",
@@ -11,6 +12,12 @@ import  { ThemeService } from "../../services/theme.service"
       state("normal", style({ transform: "scale(1)" })),
       state("hovered", style({ transform: "scale(1.05)" })),
       transition("normal <=> hovered", animate("0.3s ease-in-out")),
+    ]),
+    trigger('cardAnimation', [
+      transition(':enter', [ // يعني لما العنصر يدخل (يتعرض في الصفحة)
+        style({ opacity: 0 , transform:'scale(.5)' }),
+        animate('1000ms ease-in', style({ opacity: 1 , transform:'scale(1)' }))
+      ])
     ]),
     trigger("staggerCards", [
       transition("* => *", [
@@ -26,9 +33,10 @@ import  { ThemeService } from "../../services/theme.service"
     ]),
   ],
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements OnInit {
   isDarkMode = true
   hoveredCard: number | null = null
+  showSection=false
 
   projects = [
     {
@@ -87,11 +95,34 @@ export class ProjectsComponent {
     },
   ]
 
-  constructor(private themeService: ThemeService) {
+  constructor(private themeService: ThemeService,
+        @Inject(PLATFORM_ID) private platformId: Object
+
+  ) {
     this.themeService.isDarkMode$.subscribe((isDark) => {
       this.isDarkMode = isDark
     })
   }
+  ngOnInit(): void {
+if (isPlatformBrowser(this.platformId)) {
+    const section = document.getElementById('projects');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            this.showSection = true;
+            observer.unobserve(entry.target); // نوقف المراقبة بعد أول مرة
+          }
+        });
+      },
+      { threshold: 0.8 } // يعني لما 30% من السكشن يبقوا ظاهرين
+    );
+
+    if (section) {
+      observer.observe(section);
+    }
+  }  }
 
   onCardHover(index: number) {
     this.hoveredCard = index

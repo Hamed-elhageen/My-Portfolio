@@ -57,6 +57,7 @@ import {
 export class AboutComponent implements OnInit {
   isDarkMode = true;
   hoveredCard: number | null = null;
+  showSection = false;
 
   personalInfo = [
     {
@@ -95,14 +96,33 @@ export class AboutComponent implements OnInit {
 
   constructor(
     private themeService: ThemeService,
-    @Inject(PLATFORM_ID) private platformId: Object // ✅ Fixed
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.themeService.isDarkMode$.subscribe((isDark) => {
       this.isDarkMode = isDark;
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const section = document.getElementById("about");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              this.showSection = true;
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+
+      if (section) {
+        observer.observe(section);
+      }
+    }
+  }
 
   onCardHover(index: number): void {
     this.hoveredCard = index;

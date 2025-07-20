@@ -18,7 +18,7 @@
 
 
       <!-- Left Column - Professional Summary & Photo -->
-      <div [@slideInLeft] class="space-y-8 lg:col-span-1">
+      <div *ngIf="showSection" [@slideInLeft] class="space-y-8 lg:col-span-1">
         <!-- Casual Photo -->
         <div class="relative mx-auto group w-fit">
           <div class="absolute transition-all duration-500 opacity-75 -inset-2 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 rounded-2xl group-hover:opacity-100 animate-pulse"></div>
@@ -48,7 +48,7 @@
 
 
       <!-- Middle Column - Personal Information -->
-      <div [@slideInRight] class="space-y-6 lg:col-span-1">
+      <div *ngIf="showSection" [@slideInRight] class="space-y-6 lg:col-span-1">
         <h3 class="mb-6 text-2xl font-bold transition-colors duration-300"
             [class]="isDarkMode ? 'text-white' : 'text-gray-900'">Personal Information</h3>
         <div class="grid gap-4" [@staggerIn]>
@@ -76,7 +76,7 @@
       </div>
 
       <!-- Right Column - Education & Stats -->
-      <div [@slideInRight] class="space-y-6 lg:col-span-1">
+      <div *ngIf="showSection" [@slideInRight] class="space-y-6 lg:col-span-1">
         <!-- Education -->
         <div class="p-6 transition-all duration-300 border rounded-2xl backdrop-blur-sm hover:shadow-xl"
              [class]="isDarkMode ? 'bg-gray-700/30 border-gray-600/30 hover:shadow-blue-500/10' : 'bg-white/70 border-gray-200/50 hover:shadow-blue-500/10'">
