@@ -1,37 +1,32 @@
-import { Component, type OnInit } from "@angular/core"
-import { trigger, style, transition, animate, query, stagger } from "@angular/animations"
-import  { ThemeService } from "../../services/theme.service"
+import { trigger, style, transition, animate, state } from "@angular/animations";
+import { ThemeService } from "../../services/theme.service";
+import {
+  Component,
+  OnInit,
+  AfterViewInit,
+} from "@angular/core";
 
 @Component({
   selector: "app-skills",
   templateUrl: "./skills.component.html",
   styleUrls: ["./skills.component.css"],
   animations: [
-    trigger("progressBar", [
-      transition(":enter", [style({ width: "0%" }), animate("1.5s ease-out", style({ width: "*" }))]),
+
+    trigger("slideInLeft", [
+      state("hidden", style({ opacity: 0, transform: "translateX(-100px)" })),
+      state("visible", style({ opacity: 1, transform: "translateX(0)" })),
+      transition("hidden => visible", animate("1s ease-out")),
     ]),
-    trigger("skillCard", [
-      transition(":enter", [
-        style({ opacity: 0, transform: "scale(0.8)" }),
-        animate("0.6s ease-out", style({ opacity: 1, transform: "scale(1)" })),
-      ]),
-    ]),
-    trigger("staggerSkills", [
-      transition("* => *", [
-        query(
-          ":enter",
-          [
-            style({ opacity: 0, transform: "translateY(30px)" }),
-            stagger(100, [animate("0.6s ease-out", style({ opacity: 1, transform: "translateY(0)" }))]),
-          ],
-          { optional: true },
-        ),
-      ]),
+
+    trigger("slideInBottom", [
+      state("hidden", style({ opacity: 0, transform: "translateY(100px)" })),
+      state("visible", style({ opacity: 1, transform: "translateY(0)" })),
+      transition("hidden => visible", animate("1s ease-out")),
     ]),
   ],
 })
-export class SkillsComponent implements OnInit {
-  isDarkMode = true
+export class SkillsComponent implements OnInit, AfterViewInit {
+  isDarkMode = true;
 
   skillCategories = [
     {
@@ -45,7 +40,7 @@ export class SkillsComponent implements OnInit {
       ],
     },
     {
-      title: "Languages",
+      title: "Programming Languages",
       skills: [
         { name: "TypeScript", level: 85, color: "from-blue-600 to-blue-700" },
         { name: "JavaScript", level: 90, color: "from-yellow-500 to-yellow-600" },
@@ -64,13 +59,66 @@ export class SkillsComponent implements OnInit {
         { name: "Algorithms", level: 85, color: "from-pink-500 to-pink-600" },
       ],
     },
-  ]
+  ];
 
   constructor(private themeService: ThemeService) {
     this.themeService.isDarkMode$.subscribe((isDark) => {
-      this.isDarkMode = isDark
-    })
+      this.isDarkMode = isDark;
+    });
   }
 
-  ngOnInit() {}
+  /** حالة ظهور الكروت */
+  showSkills: boolean[] = [];
+
+  /** Additional + Soft */
+  showAdditional = false;
+  showSoft = false;
+
+  ngOnInit() {
+    this.showSkills = this.skillCategories.map(() => false);
+  }
+
+  ngAfterViewInit() {
+    /** مراقبة الكروت */
+    this.skillCategories.forEach((_, i) => {
+      const el = document.getElementById(`skill-${i}`);
+
+      if (el) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              this.showSkills[i] = true;
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+
+        observer.observe(el);
+      }
+    });
+
+    /** مراقبة Additional */
+    const addEl = document.getElementById("additional");
+    if (addEl) {
+      const observer2 = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          this.showAdditional = true;
+          observer2.unobserve(entries[0].target);
+        }
+      }, { threshold: 0.3 });
+      observer2.observe(addEl);
+    }
+
+    /** مراقبة Soft */
+    const softEl = document.getElementById("soft");
+    if (softEl) {
+      const observer3 = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          this.showSoft = true;
+          observer3.unobserve(entries[0].target);
+        }
+      }, { threshold: 0.3 });
+      observer3.observe(softEl);
+    }
+  }
 }

@@ -1,0 +1,7 @@
+/* smooth width animation */
+.progress-fill {
+  transition: width 1.5s ease-out;
+  border-radius: 9999px; /* rounded full */
+  width: 0%;             /* تأكد من الحالة الابتدائية */
+  min-width: 0;          /* يمنع سلوك غريب في بعض المتصفحات */
+}
