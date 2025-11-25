@@ -1,85 +1,96 @@
 <header [@slideIn] class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
-        [class]="isScrolled ? (isDarkMode ? 'bg-gray-900/95 backdrop-blur-sm shadow-lg shadow-blue-500/10' : 'bg-white/95 backdrop-blur-sm shadow-lg shadow-gray-500/10') : ''">
-  <nav class="container px-6 py-4 mx-auto">
-    <div class="flex items-center justify-between">
-      <!-- Logo -->
-      <div class="text-2xl font-bold transition-colors duration-300"
-           [class]="isDarkMode ? 'text-white' : 'text-gray-900'">
-        <span class="text-transparent bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text">H</span>amed<span class="text-transparent bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text">.</span>
-      </div>
-
-      <!-- Desktop Menu -->
-      <div class="items-center hidden space-x-8 md:flex">
-        <a (click)="scrollToSection('hero')"
-           class="relative transition-all duration-300 cursor-pointer hover:scale-105 group"
-           [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">
-          Home
-          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-300 group-hover:w-full"></span>
-        </a>
-        <a (click)="scrollToSection('about')"
-           class="relative transition-all duration-300 cursor-pointer hover:scale-105 group"
-           [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">
-          About
-          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-300 group-hover:w-full"></span>
-        </a>
-        <a (click)="scrollToSection('projects')"
-           class="relative transition-all duration-300 cursor-pointer hover:scale-105 group"
-           [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">
-          Projects
-          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-300 group-hover:w-full"></span>
-        </a>
-        <a (click)="scrollToSection('skills')"
-           class="relative transition-all duration-300 cursor-pointer hover:scale-105 group"
-           [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">
-          Skills
-          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-300 group-hover:w-full"></span>
-        </a>
-        <a (click)="scrollToSection('contact')"
-           class="relative transition-all duration-300 cursor-pointer hover:scale-105 group"
-           [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">
-          Contact
-          <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-300 group-hover:w-full"></span>
-        </a>
-
-        <!-- Theme Toggle -->
-        <app-theme-toggle></app-theme-toggle>
-      </div>
-
-      <!-- Mobile Menu Button -->
-      <div class="flex items-center space-x-4 md:hidden">
-        <app-theme-toggle></app-theme-toggle>
-        <button (click)="toggleMobileMenu()"
-                class="transition-colors duration-300"
+                [class]="isScrolled ? (isDarkMode ? 'bg-gray-900/95 backdrop-blur-sm shadow-lg shadow-blue-500/10' : 'bg-white/95 backdrop-blur-sm shadow-lg shadow-gray-500/10') : ''">
+    <nav class="container px-6 py-4 mx-auto">
+        <div class="flex items-center justify-between">
+            <!-- Logo -->
+            <div class="text-2xl font-bold transition-colors duration-300"
                 [class]="isDarkMode ? 'text-white' : 'text-gray-900'">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-          </svg>
-        </button>
-      </div>
-    </div>
+                <span class="text-transparent bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text">H</span>amed<span class="text-transparent bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text">.</span>
+            </div>
 
-    <!-- Mobile Menu -->
-    <div *ngIf="isMobileMenuOpen"
-         [@menuSlide]="isMobileMenuOpen ? 'open' : 'closed'"
-         class="pb-4 mt-4 rounded-lg md:hidden backdrop-blur-sm"
-         [class]="isDarkMode ? 'bg-gray-800/90' : 'bg-white/90'">
-      <div class="flex flex-col p-4 space-y-4">
-        <a (click)="scrollToSection('hero')"
-           class="transition-colors duration-300 cursor-pointer"
-           [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">Home</a>
-        <a (click)="scrollToSection('about')"
-           class="transition-colors duration-300 cursor-pointer"
-           [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">About</a>
-        <a (click)="scrollToSection('projects')"
-           class="transition-colors duration-300 cursor-pointer"
-           [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">Projects</a>
-        <a (click)="scrollToSection('skills')"
-           class="transition-colors duration-300 cursor-pointer"
-           [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">Skills</a>
-        <a (click)="scrollToSection('contact')"
-           class="transition-colors duration-300 cursor-pointer"
-           [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">Contact</a>
-      </div>
+            <!-- Desktop Menu -->
+            <div class="items-center hidden space-x-8 md:flex">
+                <a (click)="scrollToSection('hero')"
+                    class="relative transition-all duration-300 cursor-pointer hover:scale-105 group"
+                    [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">
+                    Home
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a (click)="scrollToSection('about')"
+                    class="relative transition-all duration-300 cursor-pointer hover:scale-105 group"
+                    [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">
+                    About
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a (click)="scrollToSection('projects')"
+                    class="relative transition-all duration-300 cursor-pointer hover:scale-105 group"
+                    [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">
+                    Projects
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a (click)="scrollToSection('skills')"
+                    class="relative transition-all duration-300 cursor-pointer hover:scale-105 group"
+                    [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">
+                    Skills
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+                <a (click)="scrollToSection('contact')"
+                    class="relative transition-all duration-300 cursor-pointer hover:scale-105 group"
+                    [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">
+                    Contact
+                    <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-blue-700 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+
+                <!-- Theme Toggle -->
+                <app-theme-toggle></app-theme-toggle>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center space-x-4 md:hidden">
+                <app-theme-toggle></app-theme-toggle>
+                <button (click)="toggleMobileMenu()"
+                        class="transition-colors duration-300"
+                        [class]="isDarkMode ? 'text-white' : 'text-gray-900'">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+<!-- Mobile Menu -->
+<div *ngIf="isMobileMenuOpen" class="overflow-hidden">
+    <div
+        [@menuSlide]="isMobileMenuOpen ? 'open' : 'closed'"
+        class="pb-4 mt-4 rounded-lg md:hidden backdrop-blur-sm"
+        [class]="isDarkMode ? 'bg-gray-800/90' : 'bg-white/90'">
+
+        <div class="flex flex-col p-4 space-y-4">
+            <a (click)="scrollToSection('hero')"
+                class="transition-colors duration-300 cursor-pointer"
+                [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">Home</a>
+
+            <a (click)="scrollToSection('about')"
+                class="transition-colors duration-300 cursor-pointer"
+                [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">About</a>
+
+            <a (click)="scrollToSection('projects')"
+                class="transition-colors duration-300 cursor-pointer"
+                [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">Projects</a>
+
+            <a (click)="scrollToSection('skills')"
+                class="transition-colors duration-300 cursor-pointer"
+                [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">Skills</a>
+
+            <a (click)="scrollToSection('contact')"
+                class="transition-colors duration-300 cursor-pointer"
+                [class]="isDarkMode ? 'text-white hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'">Contact</a>
+        </div>
+
     </div>
-  </nav>
+</div>
+
+
+    </nav>
 </header>

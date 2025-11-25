@@ -9,17 +9,24 @@ import { isPlatformBrowser } from "@angular/common"
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.css"],
   animations: [
-    trigger("slideIn", [                                                                                                                                       //firstly , this animantion from angular animations for the header , when you open the site the header appears from bottom 50px to top quickly
+    trigger("slideIn", [                                                                                                                                       //firstly , this animantion from angular animations for the header , when you open the site the header appears from top to its position quickly
       transition(":enter", [
         style({ transform: "translateY(-100%)" }),
         animate("0.5s ease-in", style({ transform: "translateY(0%)" })),
       ]),
     ]),
-    trigger("menuSlide", [                                                                                                                           //this animation for mobile menu , if it is closed it will be at 100px left and disapearing with opacity 0 , and if it is opened it appear with opacity 1 and togglign between them in .3s
-      state("closed", style({ transform: "translateX(-100%)", opacity: 0 })),
-      state("open", style({ transform: "translateX(0)", opacity: 1 })),
-      transition("closed <=> open", animate("0.3s ease-in-out")),
-    ]),
+    trigger("menuSlide", [
+  state("closed", style({ transform: "translateY(-100%)", opacity: 0 })),
+  state("open", style({ transform: "translateY(0)", opacity: 1 })),
+
+  transition("closed <=> open", animate("0.3s ease-in-out")),
+  // مهم جداً – أنيميشن أول ظهور
+  transition(":enter", [
+    style({ transform: "translateY(-100%)", opacity: 0 }),
+    animate("0.3s ease-out")
+  ]),
+]),
+
   ],
 })
 export class HeaderComponent {
