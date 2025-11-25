@@ -35,9 +35,9 @@ export class ThemeService {
       this.setStorageItem("theme", isDark ? "dark" : "light");                                                   //and here putting theme in local storage , if isDark true , it will put in local storage dark and if it false it will put light
 
       if (isDark) {
-        document.documentElement.classList.add("dark");                                                 //and if isDark is equal to true , we will add the class dark to the html element which will add styles as background and color and so on
+        document.body.classList.add("dark");                                                 //and if isDark is equal to true , we will add the class dark to the html element which will add styles as background and color and so on
       } else {
-        document.documentElement.classList.remove("dark");                                              //and if it was false we will remove this class which contains these styles
+         document.body.classList.remove("dark");                                              //and if it was false we will remove this class which contains these styles
       }
     }
   }
@@ -45,25 +45,6 @@ export class ThemeService {
   getCurrentTheme(): boolean {
     return this.isDarkMode.value;                                                                                   //this function gets the current theme from the bahaviour subject value
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
