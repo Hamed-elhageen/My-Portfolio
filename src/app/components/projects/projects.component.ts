@@ -19,7 +19,7 @@ import { isPlatformBrowser } from "@angular/common";
     // Zoom In Animation for each card
 trigger("cardAnimation", [
       state("hidden", style({ transform: "scale(.5)", opacity:0 })),
-      state("visible", style({ transform: "scale(1.05)",opacity:1 })),
+      state("visible", style({ transform: "scale(1)",opacity:1 })),
       transition("hidden <=> visible", animate("01s ease-in-out")),
     ]),
 

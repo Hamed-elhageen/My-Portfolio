@@ -24,7 +24,7 @@
            [@cardHover]="hoveredCard === i ? 'hovered' : 'normal'"
            (mouseenter)="onCardHover(i)"
            (mouseleave)="onCardLeave()"
-           class="overflow-hidden transition-all duration-300 border rounded-xl backdrop-blur-sm"
+           class="relative overflow-hidden transition-all duration-300 border md:h-[500px] rounded-xl backdrop-blur-sm"
            [class]="isDarkMode ? 'bg-slate-800/50 border-slate-700/50 hover:border-blue-500/50' : 'bg-white/90 border-gray-200/50 hover:border-blue-500/50 shadow-lg'">
 
         <!-- Project Image -->
@@ -45,7 +45,7 @@
              [class]="isDarkMode ? 'text-gray-300' : 'text-gray-600'">{{ project.description }}</p>
 
           <!-- Tech Stack -->
-          <div class="flex flex-wrap gap-2 mb-6">
+          <div class="flex flex-wrap gap-2 mb-6 md:absolute md:bottom-12">
             <span *ngFor="let tech of project.techStack"
                   class="px-3 py-1 text-sm transition-colors duration-300 border rounded-full"
                   [class]="isDarkMode ? 'bg-slate-700/50 text-blue-300 border-blue-500/20' : 'bg-blue-50 text-blue-700 border-blue-200'">
@@ -54,7 +54,7 @@
           </div>
 
           <!-- Project Links -->
-          <div class="flex gap-4">
+          <div class="flex gap-4 md:absolute md:bottom-4">
             <a [href]="project.link"
                target="_blank"
                rel="noopener noreferrer"
