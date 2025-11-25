@@ -35,7 +35,7 @@ import {
     trigger('scaleIn', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0.5)' }),
-        animate('1s 1s  ease-out', style({ opacity: 1, transform: 'scale(1)' })),
+        animate('1s 2s  ease-out', style({ opacity: 1, transform: 'scale(1)' })),
       ]),
     ]),
     trigger('textReveal', [
