@@ -14,15 +14,15 @@
       </p>
     </div>
 
-    <div class="grid items-start gap-12 lg:grid-cols-3">
+    <div class="grid items-center gap-12 lg:grid-cols-3">
 
 
       <!-- Left Column - Professional Summary & Photo -->
-      <div *ngIf="showSection" [@slideInLeft] class="space-y-8 lg:col-span-1">
+      <div   class="space-y-8 lg:col-span-1">
         <!-- Casual Photo -->
-        <div class="relative mx-auto group w-fit">
+        <div id="photo"  class="relative mx-auto group w-fit" [@slideInLeft]="showPhoto ? 'visible' : 'hidden'">
           <div class="absolute transition-all duration-500 opacity-75 -inset-2 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 rounded-2xl group-hover:opacity-100 animate-pulse"></div>
-          <div class="relative w-64 overflow-hidden border-4 h-80 rounded-2xl border-white/20 backdrop-blur-sm">
+          <div class="relative h-64 overflow-hidden border-4 w-72 md:w-96 rounded-2xl border-white/20 backdrop-blur-sm">
             <img src="/two-min.webp"
                  alt="Hamed Ragab - Casual Photo"
                  class="object-cover w-full h-full transition-transform duration-700 group-hover:scale-110">
@@ -31,7 +31,7 @@
         </div>
 
         <!-- Professional Summary -->
-        <div class="p-6 transition-all duration-300 border rounded-2xl backdrop-blur-sm hover:shadow-xl"
+        <div id="summary"  [@slideInLeft]="showSummary ? 'visible' : 'hidden'" class="p-6 transition-all duration-300 border rounded-2xl backdrop-blur-sm hover:shadow-xl"
              [class]="isDarkMode ? 'bg-gray-700/30 border-gray-600/30 hover:shadow-blue-500/10' : 'bg-white/70 border-gray-200/50 hover:shadow-blue-500/10'">
           <h3 class="mb-4 text-2xl font-bold transition-colors duration-300"
               [class]="isDarkMode ? 'text-white' : 'text-gray-900'">Professional Summary</h3>
@@ -48,7 +48,7 @@
 
 
       <!-- Middle Column - Personal Information -->
-      <div *ngIf="showSection" [@slideInRight] class="space-y-6 lg:col-span-1">
+      <div id="information"  [@slideInLeft]="showInformation ? 'visible' : 'hidden'" class="space-y-6 lg:col-span-1">
         <h3 class="mb-6 text-2xl font-bold transition-colors duration-300"
             [class]="isDarkMode ? 'text-white' : 'text-gray-900'">Personal Information</h3>
         <div class="grid gap-4" [@staggerIn]>
@@ -76,7 +76,7 @@
       </div>
 
       <!-- Right Column - Education & Stats -->
-      <div *ngIf="showSection" [@slideInRight] class="space-y-6 lg:col-span-1">
+      <div id="education"  [@slideInLeft]="showEducation ? 'visible' : 'hidden'" class="space-y-6 lg:col-span-1">
         <!-- Education -->
         <div class="p-6 transition-all duration-300 border rounded-2xl backdrop-blur-sm hover:shadow-xl"
              [class]="isDarkMode ? 'bg-gray-700/30 border-gray-600/30 hover:shadow-blue-500/10' : 'bg-white/70 border-gray-200/50 hover:shadow-blue-500/10'">
@@ -99,7 +99,7 @@
         </div>
 
         <!-- Stats -->
-        <div class="grid grid-cols-2 gap-4">
+        <div id="stats"  class="grid grid-cols-2 gap-4" [@slideInLeft]="showStats ? 'visible' : 'hidden'">
           <div class="p-6 text-center transition-all duration-300 border rounded-xl backdrop-blur-sm hover:shadow-xl group"
                [class]="isDarkMode ? 'bg-gradient-to-br from-blue-500/20 to-gray-500/20 border-blue-500/30 hover:shadow-blue-500/20' : 'bg-gradient-to-br from-blue-500/20 to-gray-500/20 border-blue-500/30 hover:shadow-blue-500/20'">
             <div class="mb-2 text-3xl font-bold text-transparent transition-transform duration-300 bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text group-hover:scale-110">6+</div>
@@ -110,13 +110,13 @@
                [class]="isDarkMode ? 'bg-gradient-to-br from-blue-500/20 to-gray-500/20 border-blue-500/30 hover:shadow-blue-500/20' : 'bg-gradient-to-br from-blue-500/20 to-gray-500/20 border-blue-500/30 hover:shadow-blue-500/20'">
             <div class="mb-2 text-3xl font-bold text-transparent transition-transform duration-300 bg-gradient-to-r from-blue-500 to-blue-700 bg-clip-text group-hover:scale-110">2+</div>
             <div class="transition-colors duration-300"
-                 [class]="isDarkMode ? 'text-gray-300' : 'text-gray-600'">Years Learning</div>
+                 [class]="isDarkMode ? 'text-gray-300' : 'text-gray-600'">Years experience</div>
           </div>
         </div>
 
         <!-- Skills Preview -->
-        <div class="p-6 transition-all duration-300 border rounded-2xl backdrop-blur-sm hover:shadow-xl"
-             [class]="isDarkMode ? 'bg-gray-700/30 border-gray-600/30 hover:shadow-blue-500/10' : 'bg-white/70 border-gray-200/50 hover:shadow-blue-500/10'">
+        <div id="skills"  [@slideInLeft]="showSkills ? 'visible' : 'hidden'" class="p-6 transition-all duration-300 border rounded-2xl backdrop-blur-sm hover:shadow-xl"
+            [class]="isDarkMode ? 'bg-gray-700/30 border-gray-600/30 hover:shadow-blue-500/10' : 'bg-white/70 border-gray-200/50 hover:shadow-blue-500/10'">
           <h4 class="mb-4 text-xl font-semibold transition-colors duration-300"
               [class]="isDarkMode ? 'text-blue-400' : 'text-blue-600'">Core Technologies</h4>
           <div class="flex flex-wrap gap-2">
