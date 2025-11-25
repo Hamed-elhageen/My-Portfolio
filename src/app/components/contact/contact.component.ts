@@ -1,5 +1,5 @@
-import { Component } from "@angular/core"
-import { trigger, style, transition, animate } from "@angular/animations"
+import { AfterViewChecked, AfterViewInit, Component, OnInit } from "@angular/core"
+import { trigger, style, transition, animate, state } from "@angular/animations"
 import  { ThemeService } from "../../services/theme.service"
 
 @Component({
@@ -7,15 +7,14 @@ import  { ThemeService } from "../../services/theme.service"
   templateUrl: "./contact.component.html",
   styleUrls: ["./contact.component.css"],
   animations: [
-    trigger("fadeInUp", [
-      transition(":enter", [
-        style({ opacity: 0, transform: "translateY(30px)" }),
-        animate("0.8s ease-out", style({ opacity: 1, transform: "translateY(0)" })),
-      ]),
-    ]),
+        trigger("slideInBottom", [
+          state("hidden", style({ opacity: 0, transform: "translateY(100px)" })),
+          state("visible", style({ opacity: 1, transform: "translateY(0)" })),
+          transition("hidden => visible", animate("1s ease-out")),
+        ]),
   ],
 })
-export class ContactComponent {
+export class ContactComponent  implements OnInit, AfterViewInit{
   isDarkMode = true
 
   contactInfo = [
@@ -43,5 +42,48 @@ export class ContactComponent {
     this.themeService.isDarkMode$.subscribe((isDark) => {
       this.isDarkMode = isDark
     })
+  }
+
+
+  showDetails: boolean[] = [];
+
+  /** Additional + Soft */
+  showReady = false;
+
+  ngOnInit() {
+    this.showDetails = this.contactInfo.map(() => false);
+  }
+
+  ngAfterViewInit() {
+    /** مراقبة الكروت */
+    this.contactInfo.forEach((_, i) => {
+      const el = document.getElementById(`detail-${i}`);
+
+      if (el) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              this.showDetails[i] = true;
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+
+        observer.observe(el);
+      }
+    });
+
+    /** مراقبة Additional */
+    const addEl = document.getElementById("ready");
+    if (addEl) {
+      const observer2 = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          this.showReady = true;
+          observer2.unobserve(entries[0].target);
+        }
+      }, { threshold: 0.3 });
+      observer2.observe(addEl);
+    }
+
   }
 }

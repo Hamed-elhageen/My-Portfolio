@@ -23,9 +23,9 @@
 
     <div class="max-w-4xl mx-auto">
       <div class="grid gap-8 mb-12 md:grid-cols-3">
-        <div *ngFor="let contact of contactInfo"
-             [@fadeInUp]
-             class="p-6 text-center transition-all duration-300 transform border rounded-xl backdrop-blur-sm hover:scale-105"
+        <div *ngFor="let contact of contactInfo , let i =index"
+                [id]="'detail-' + i"
+                 [@slideInBottom]="showDetails[i] ? 'visible' : 'hidden'"             class="p-6 text-center transition-all duration-300 transform border rounded-xl backdrop-blur-sm hover:scale-105"
              [class]="isDarkMode ? 'bg-slate-800/50 border-slate-700/50 hover:border-blue-500/50' : 'bg-white/90 border-gray-200/50 hover:border-blue-500/50 shadow-lg'">
           <div class="flex items-center justify-center w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-blue-600 to-blue-700">
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,7 +42,7 @@
       </div>
 
       <!-- Call to Action -->
-      <div [@fadeInUp] class="p-8 text-center transition-colors duration-300 border rounded-2xl backdrop-blur-sm"
+      <div id="ready" [@slideInBottom]="showReady ? 'visible' : 'hidden'" class="p-8 text-center transition-colors duration-300 border rounded-2xl backdrop-blur-sm"
            [class]="isDarkMode ? 'bg-gradient-to-r from-blue-500/10 to-gray-500/10 border-blue-500/20' : 'bg-gradient-to-r from-blue-50 to-gray-50 border-blue-200/50 shadow-lg'">
         <h3 class="mb-4 text-2xl font-bold transition-colors duration-300"
             [class]="isDarkMode ? 'text-white' : 'text-gray-900'">Ready to work together?</h3>
