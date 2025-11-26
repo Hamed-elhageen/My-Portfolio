@@ -10,15 +10,15 @@ import { trigger, style, transition, animate } from "@angular/animations";
       transition(":enter", [style({ opacity: 0 }), animate(".5s ease-in", style({ opacity: 1 }))]),                   //inside the transition word you enter 2 things , when the animation will happen (when opening the page and the [] of the style of the element and the state it will go to it using the two key word style and animate )
     ]),
 
-    trigger('pageTransition', [
-      transition(':enter', [
-        style({ opacity: 0 }),
-        animate('300ms ease-out', style({ opacity: 1 }))
-      ]),
-      transition(':leave', [
-        animate('300ms ease-in', style({ opacity: 0 }))
-      ])
-    ])
+    // trigger('pageTransition', [
+    //   transition(':enter', [
+    //     style({ opacity: 0 }),
+    //     animate('300ms ease-out', style({ opacity: 1 }))
+    //   ]),
+    //   transition(':leave', [
+    //     animate('300ms ease-in', style({ opacity: 0 }))
+    //   ])
+    // ])
   ],
 })
 export class AppComponent implements OnInit {
