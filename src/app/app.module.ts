@@ -12,6 +12,8 @@ import { ContactComponent } from './components/contact/contact.component';
 import { ParticlesComponent } from './components/particles/particles.component';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { trigger, transition, style, animate } from '@angular/animations';
+
 
 
 @NgModule({

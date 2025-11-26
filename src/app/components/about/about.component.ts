@@ -61,7 +61,7 @@ export class AboutComponent implements OnInit, AfterViewInit {
   showInformation = false;
   showEducation = false;
   showStats = false;
-  showSkills = false;
+  showCoreSkills = false;
 
   personalInfo = [
     { label: "Location", value: "Damanhour – Beheira – Egypt", icon: "M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" },
@@ -100,7 +100,7 @@ export class AboutComponent implements OnInit, AfterViewInit {
       { id: 'information', setter: (v: boolean) => this.showInformation = v },
       { id: 'education', setter: (v: boolean) => this.showEducation = v },
       { id: 'stats', setter: (v: boolean) => this.showStats = v },
-      { id: 'skills', setter: (v: boolean) => this.showSkills = v },
+      { id: 'coreskills', setter: (v: boolean) => this.showCoreSkills = v },
     ];
 
     // إنشاء IntersectionObserver واحد لكل قسم
